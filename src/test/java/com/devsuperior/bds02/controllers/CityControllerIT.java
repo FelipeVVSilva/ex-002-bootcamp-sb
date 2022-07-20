@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
@@ -34,7 +36,7 @@ public class CityControllerIT {
 	public void findAllShouldReturnAllResourcesSortedByName() throws Exception {
 		
 		ResultActions result =
-				mockMvc.perform(get("/cities")
+				mockMvc.perform(get("/cities?page=0&linesPerPage=24&direction=ASC&orderBy=name")
 					.contentType(MediaType.APPLICATION_JSON));
 
 		result.andExpect(status().isOk());
