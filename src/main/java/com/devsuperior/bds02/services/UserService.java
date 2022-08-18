@@ -10,11 +10,15 @@ import org.springframework.data.domain.Sort;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.devsuperior.bds02.dto.RoleDTO;
 import com.devsuperior.bds02.dto.UserDTO;
+import com.devsuperior.bds02.entities.Role;
 import com.devsuperior.bds02.entities.User;
+import com.devsuperior.bds02.repositories.RoleRepository;
 import com.devsuperior.bds02.repositories.UserRepository;
 import com.devsuperior.bds02.services.exceptions.DatabaseException;
 import com.devsuperior.bds02.services.exceptions.ObjectNotFoundException;
@@ -24,6 +28,10 @@ public class UserService implements UserDetailsService{
 
 	@Autowired
 	private UserRepository repo;
+	@Autowired
+	private RoleRepository roleRepository;
+	@Autowired
+	private BCryptPasswordEncoder encoder;
 	
 	@Transactional(readOnly = true)
 	public List<UserDTO> findAll() {
@@ -35,7 +43,7 @@ public class UserService implements UserDetailsService{
 	@Transactional
 	public UserDTO insert(UserDTO dto) {
 		User entity = new User();
-		entity.setName(dto.getName());
+		copyDtoToEntity(entity, dto);
 		entity = repo.save(entity);
 		return new UserDTO(entity);
 	}
@@ -49,6 +57,20 @@ public class UserService implements UserDetailsService{
 		}
 		catch (EmptyResultDataAccessException e) {
 			throw new ObjectNotFoundException("Id not found: " + id);
+		}
+		
+	}
+	
+	private void copyDtoToEntity(User entity, UserDTO dto) {
+		
+		entity.setEmail(dto.getEmail());
+		entity.setPassword(encoder.encode(dto.getPassword()));
+		
+		entity.getRoles().clear();
+
+		for(RoleDTO roleDto : dto.getRoles()) {
+			Role role = roleRepository.getOne(roleDto.getId());
+			entity.getRoles().add(role);
 		}
 		
 	}

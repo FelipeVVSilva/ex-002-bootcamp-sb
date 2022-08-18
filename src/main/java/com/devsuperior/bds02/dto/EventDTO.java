@@ -3,15 +3,23 @@ package com.devsuperior.bds02.dto;
 import java.io.Serializable;
 import java.time.LocalDate;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
+
 import com.devsuperior.bds02.entities.Event;
+import com.devsuperior.bds02.services.validation.EventInsertValid;
 
 public class EventDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	private Long id;
+	
+	@NotBlank(message = "Campo requerido")
 	private String name;
 	private LocalDate date;
 	private String url;
+	
+	@NotNull(message = "Campo requerido")
 	private Long cityId;
 	
 	public EventDTO() {
