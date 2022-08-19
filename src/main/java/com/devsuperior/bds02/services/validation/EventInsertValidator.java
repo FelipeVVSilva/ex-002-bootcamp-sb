@@ -17,9 +17,6 @@ import com.devsuperior.bds02.resources.exceptions.FieldMessage;
 
 public class EventInsertValidator implements ConstraintValidator<EventInsertValid, EventDTO>{
 
-	@Autowired
-	private EventRepository eventRepository;
-
 	@Override
 	public void initialize(EventInsertValid ann) {
 
@@ -29,11 +26,8 @@ public class EventInsertValidator implements ConstraintValidator<EventInsertVali
 	public boolean isValid(EventDTO dto, ConstraintValidatorContext context) {
 
 		List<FieldMessage> list = new ArrayList<>();
-
-		Optional<Event> obj = eventRepository.findById(dto.getId());
-		Event event = obj.get();
 		
-		if(event.getDate().isBefore(LocalDate.now())) {
+		if(dto.getDate().isBefore(LocalDate.now())) {
 			list.add(new FieldMessage("date", "A data do evento não pode ser passada"));
 		}
 

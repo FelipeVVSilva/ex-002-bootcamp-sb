@@ -53,6 +53,7 @@ public class EventService {
 	}
 	
 	private void updateData(Event entity, EventDTO dto) {
+		
 		entity.setName(dto.getName());
 		entity.setDate(dto.getDate());
 		entity.setUrl(dto.getUrl());
