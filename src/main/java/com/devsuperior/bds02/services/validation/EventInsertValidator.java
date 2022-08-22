@@ -15,10 +15,10 @@ import com.devsuperior.bds02.entities.Event;
 import com.devsuperior.bds02.repositories.EventRepository;
 import com.devsuperior.bds02.resources.exceptions.FieldMessage;
 
-public class EventInsertValidator implements ConstraintValidator<EventInsertValid, EventDTO>{
+public class EventInsertValidator implements ConstraintValidator<EventinsertValid, EventDTO>{
 
 	@Override
-	public void initialize(EventInsertValid ann) {
+	public void initialize(EventinsertValid ann) {
 
 	}
 

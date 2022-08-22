@@ -11,7 +11,7 @@ import javax.validation.Payload;
 @Constraint(validatedBy = EventInsertValidator.class)
 @Target({ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-public @interface EventInsertValid {
+public @interface EventinsertValid {
 
 	String message() default "Validation error";
 

@@ -5,7 +5,6 @@ import java.util.Set;
 
 import com.devsuperior.bds02.entities.Role;
 import com.devsuperior.bds02.entities.User;
-import com.devsuperior.bds02.services.validation.EventInsertValid;
 
 public class UserDTO {
 

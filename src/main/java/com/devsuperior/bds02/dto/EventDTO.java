@@ -7,9 +7,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 
 import com.devsuperior.bds02.entities.Event;
-import com.devsuperior.bds02.services.validation.EventInsertValid;
+import com.devsuperior.bds02.services.validation.EventinsertValid;
 
-@EventInsertValid
+@EventinsertValid
 public class EventDTO implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
